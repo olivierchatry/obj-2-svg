@@ -68,7 +68,26 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(ProjectDir)build\</OutDir>
+    <IntDir>$(ProjectDir)build\$(Platform)\$(Configuration\</IntDir>
+    <TargetName>$(ProjectName).$(Platform).$(Configuration)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)build\</OutDir>
+    <IntDir>$(ProjectDir)build\$(Platform)\$(Configuration\</IntDir>
+    <TargetName>$(ProjectName).$(Platform).$(Configuration)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName).$(Platform).$(Configuration)</TargetName>
+    <IntDir>$(ProjectDir)build\$(Platform)\$(Configuration\</IntDir>
+    <OutDir>$(ProjectDir)build\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>$(ProjectName).$(Platform).$(Configuration)</TargetName>
+    <IntDir>$(ProjectDir)build\$(Platform)\$(Configuration\</IntDir>
+    <OutDir>$(ProjectDir)build\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -110,13 +129,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\main.cpp" />
-    <ClCompile Include="..\tiny_obj_loader.cc" />
+    <ClCompile Include="externals\tiny_obj_loader.cc" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="process\process_backface_culling.cpp" />
+    <ClCompile Include="process\process_compute_min_max.cpp" />
+    <ClCompile Include="process\process_debug_render_mesh_to_tga.cpp" />
+    <ClCompile Include="process\process_generate_triangle_list.cpp" />
+    <ClCompile Include="process\process_load_obj.cpp" />
+    <ClCompile Include="process\process_optimize_mesh.cpp" />
+    <ClCompile Include="process\process_output_svg.cpp" />
+    <ClCompile Include="process\process_remove_degenerate_triangle.cpp" />
+    <ClCompile Include="process\process_split_triangle_by_material.cpp" />
+    <ClCompile Include="process\process_transform_points.cpp" />
+    <ClCompile Include="process\process_triangle_occlusion.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\rasterizer.h" />
-    <ClInclude Include="..\tiny_obj_loader.h" />
-    <ClInclude Include="..\v3.h" />
+    <ClInclude Include="externals\json.hpp" />
+    <ClInclude Include="externals\stb_image_write.h" />
+    <ClInclude Include="externals\tiny_obj_loader.h" />
+    <ClInclude Include="process\process.h" />
+    <ClInclude Include="libs\rasterizer.h" />
+    <ClInclude Include="libs\v3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
